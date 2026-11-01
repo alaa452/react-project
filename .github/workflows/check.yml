@@ -1,0 +1,20 @@
+name: Part 1 checks
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+jobs:
+  verify:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .node-version
+      - name: Install dependencies
+        run: npm install
+      - name: Check Part 1 structure
+        run: npm run check
+      - name: Production build
+        run: npm run build
